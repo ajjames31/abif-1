@@ -1697,7 +1697,7 @@ security_menu(){
 							|| dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_SeeConfErrTitle " --msgbox "$_SeeConfErrBody1" 0 0 ;;
 			esac
              ;;
-          *) main_menu_online
+          *) main_menu
 			;;
     esac
     
