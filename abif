@@ -665,8 +665,6 @@ auto_partition(){
 select_filesystem(){
 
 	# prep variables
-	echo "" > ${MOUNT_OPTS}
-	FS_MNT_OPT=0
 	fs_opts=""
 	CHK_NUM=0
 
@@ -687,7 +685,6 @@ select_filesystem(){
 	case $(cat ${ANSWER}) in
 		"$_FSSkip")	FILESYSTEM="$_FSSkip" ;;
 		"btrfs") 	FILESYSTEM="mkfs.btrfs -f"	
-					FS_MNT_OPT=1 
 					CHK_NUM=16
 					fs_opts="autodefrag compress=zlib compress=lzo compress=no compress-force=zlib compress-force=lzo discard noacl noatime nodatasum nospace_cache recovery skip_balance space_cache ssd ssd_spread"
 					modprobe btrfs
@@ -745,6 +742,7 @@ mount_partitions() {
 mount_opts() {
 
 	FS_OPTS=""
+	echo "" > ${MOUNT_OPTS}
 	
 	for i in ${fs_opts}; do
 		FS_OPTS="${FS_OPTS} ${i} - off"
