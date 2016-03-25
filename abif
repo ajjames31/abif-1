@@ -1,6 +1,6 @@
 # !/bin/bash
 #
-# Arch Base Installation Framework (version 2.2 - 23-Mar-2016)
+# Arch Base Installation Framework (version 2.2.1 - 25-Mar-2016)
 #
 # Written by Carl Duff for PacBang Linux
 #
@@ -15,11 +15,25 @@
 ##																	##
 ######################################################################
 
-# ISO Specific Variables
+#															#
+# ISO Specific Variables. READ CAREFULLY FOR YOUR DISTRO	#
+#															#
+
+# This MUST be the same as listed in /etc/hosts
 ISO_HOST="pacbang"                           		# ISO Host Name
-ISO_USER="paclive"           						# Live user account
-VERSION="Pacbang Installation Framework 2.2"		# Installer Name / Version
+
+# This MUST be the same as the live account
+ISO_USER="paclive"           						# Live user account.
+
+# Call this what you like
+VERSION="Pacbang Installation Framework 2.2.1"		# Installer Name / Version
+
+# This should not need to be changed
 TRANS_SRC="/abif-master"							# Dir where translation files are stored
+
+#								#
+# Other variables for installer	#
+#								#
 
 # Create a temporary file to store menu selections
 ANSWER="/tmp/.abif"
@@ -308,7 +322,7 @@ set_timezone() {
      dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_ConfBseTimeHC " --yesno "$_TimeZQ ${ZONE}/${SUBZONE}?" 0 0 
      
      if [[ $? -eq 0 ]]; then
-        arch_chroot "ln -s /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime" 2>/tmp/.errlog
+        arch_chroot "ln -sf /usr/share/zoneinfo/${ZONE}/${SUBZONE} /etc/localtime" 2>/tmp/.errlog
         check_for_error
      else
         config_base_menu
