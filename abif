@@ -1,6 +1,6 @@
 # !/bin/bash
 #
-# Arch Base Installation Framework (version 2.2.2 - 25-Mar-2016)
+# Arch Base Installation Framework (version 2.2.3 - 26-Mar-2016)
 #
 # Written by Carl Duff for PacBang Linux
 #
@@ -26,7 +26,7 @@ ISO_HOST="pacbang"                           		# ISO Host Name
 ISO_USER="paclive"           						# Live user account.
 
 # Call this what you like
-VERSION="Pacbang Installation Framework 2.2.2"		# Installer Name / Version
+VERSION="Pacbang Installation Framework 2.2.3"		# Installer Name / Version
 
 # This should not need to be changed
 TRANS_SRC="/abif-master"							# Dir where translation files are stored
@@ -1681,8 +1681,8 @@ security_menu(){
 				elif [[ $(cat ${ANSWER}) == "$_Edit" ]]; then
 					nano ${MOUNTPOINT}/etc/systemd/journald.conf
 				else
-					sed -i "s/#Storage.*\|Storage.*/Storage=$(cat ${ANSWER})/g" ${MOUNTPOINT}/etc/systemd/journald.conf
-					sed -i "s/SystemMaxUse.*/#&/g" ${MOUNTPOINT}/etc/systemd/journald.conf
+					sed -i "s/#SystemMaxUse.*\|SystemMaxUse.*/SystemMaxUse=$(cat ${ANSWER})/g" ${MOUNTPOINT}/etc/systemd/journald.conf
+					sed -i "s/Storage.*/#&/g" ${MOUNTPOINT}/etc/systemd/journald.conf
 					dialog --backtitle "$VERSION - $SYSTEM ($ARCHI)" --title " $_SecJournTitle " --infobox "\n$_Done!\n\n" 0 0
 					sleep 2
 				fi
